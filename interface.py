@@ -6,15 +6,17 @@ from PIL import Image, ImageTk
 DARK_BG = '#2E2E2E'         # Fondo oscuro
 BUTTON_COLOR = '#FF0000'    # Rojo de YouTube
 BUTTON_HIGHLIGHT = '#D00000' # Rojo oscuro
-TEXT_COLOR = '#FFFFFF'      # Blanco
+TEXT_COLOR = '#2E2E2E'
+WHITE = '#FFFFFF'
 ERROR_COLOR = '#FF4500'     # Naranja rojizo
-SIZE = "500x600"
+SIZE = "500x660"
 ICON = 'assets/youtube.ico'
 LOADING_PNG = 'assets/loading.png'
 DONE_PNG = 'assets/done.png'
 CROSS_PNG = 'assets/cross.png'
 LOGO_PNG = 'assets/youtube-icon.png'  # Nombre del logo actualizado
 FONT = ('Helvetica', 12, 'bold')
+EMPTY_IMAGE = 'assets/empty.png'
 
 class Interface:
 
@@ -68,9 +70,22 @@ class Interface:
         self.loading_image = ImageTk.PhotoImage(Image.open(LOADING_PNG))
         self.check_mark_image = ImageTk.PhotoImage(Image.open(DONE_PNG))
         self.cross_mark = ImageTk.PhotoImage(Image.open(CROSS_PNG))
+        self.empty_image = ImageTk.PhotoImage(Image.open(EMPTY_IMAGE))
 
-        self.status_label = ttk.Label(self.root, background=DARK_BG)
-        self.status_label.pack(pady=20)
+        self.status_label = ttk.Label(self.root, background=DARK_BG, image=self.empty_image)
+        self.status_label.pack(pady=10)
+
+        self.downloads_label = ttk.Label(self.root, foreground=WHITE, text="Ultimas descargas:")
+        self.downloads_label.pack(pady=15)
+
+        self.download_1_label = ttk.Label(self.root, foreground=WHITE)
+        self.download_1_label.pack(pady=2)
+
+        self.download_2_label = ttk.Label(self.root, foreground=WHITE)
+        self.download_2_label.pack(pady=2)
+        
+        self.download_3_label = ttk.Label(self.root, foreground=WHITE)
+        self.download_3_label.pack(pady=2)
 
     def show_loading(self):
         self.status_label.config(image=self.loading_image)
@@ -95,6 +110,14 @@ class Interface:
             color = 'green'
         
         self.error_label.config(text=message, foreground=color)
+
+    def update_lasts_downloads(self, index, text):
+        if index == 1:
+            self.download_1_label.config(text=text)
+        if index == 2:
+            self.download_2_label.config(text=text)
+        if index == 3:
+            self.download_3_label.config(text=text)
 
     def get_url(self):
         return self.url_entry.get()
