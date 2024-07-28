@@ -26,9 +26,10 @@ Este archivo inicia la aplicación creando una instancia de la clase Controller 
 
 Para ejecutarlo primero es necesario clonar el repositorio y luego instalar las siguientes dependencias:
 
-*  pip install tkinter
-*  pip install pytubefix
-*  pip install pillow
+pip install tkinter
+pip install pytubefix
+pip install pillow
+
 
 ## Uso
 Ejecutar la aplicación:
